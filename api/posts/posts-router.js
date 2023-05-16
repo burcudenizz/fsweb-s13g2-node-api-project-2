@@ -92,3 +92,19 @@ router.delete("/:id", async (req, res) => {
     res.status(500).json({ message: "Gönderi silinemedi" });
   }
 });
+
+//GET ile belirli bir id'ye sahip commentsleri getirdik.
+
+router.get("/:id/comments", async (req, res) => {
+  try {
+    let willFoundPost = await Posts.findById(req.params.id);
+    if (!willFoundPost) {
+      res.status(404).json({ message: "Belirtilen ID'li gönderi bulunamadı" });
+    } else {
+      let comments = await Posts.findPostComments(req.params.id);
+      res.status(200).json(comments);
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Yorumlar bilgisi getirilemedi" });
+  }
+});
