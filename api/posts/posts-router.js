@@ -2,7 +2,6 @@
 const router = require("express").Router();
 
 const Posts = require("./posts-model");
-module.exports = router;
 
 //GET ile tüm postları çektik.
 router.get("/", (req, res) => {
@@ -108,3 +107,4 @@ router.get("/:id/comments", async (req, res) => {
     res.status(500).json({ message: "Yorumlar bilgisi getirilemedi" });
   }
 });
+module.exports = router;
