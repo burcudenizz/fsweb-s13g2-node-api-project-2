@@ -71,6 +71,7 @@ router.post("/", async (req, res) => {
       let insersedPost = await Posts.findById(id);
       res.status(201).json(insersedPost);
     } catch (err) {
+      console.log(err); // erroru saklamış oluruz.
       res
         .status(500)
         .json({ message: "Veritabanına kaydedilirken bir hata oluştu" });
