@@ -12,6 +12,17 @@ router.get("/", (req, res) => {
     .catch(() => res.status(500).json({ message: "Gönderiler alınamadı" }));
 });
 
+/* -------async/await ile-------
+router.get("/", async (req, res) => {
+  try {
+    const posts = await Posts.find();
+    res.status(201).json(posts);
+  } catch (error) {
+    res.status(500).json({ message: "Gönderiler alınamadı" });
+  }
+});
+*/
+
 //GET ile belirli id'deki postu çektik.
 
 router.get("/:id", (req, res) => {
@@ -29,6 +40,21 @@ router.get("/:id", (req, res) => {
       res.status(500).json({ message: "Gönderi bilgisi alınamadı" });
     });
 });
+
+/* -------async/await ile-------
+router.get("/:id", async (req, res) => {
+  try {
+    const postWithId = await Posts.findById(req.params.id);
+    if (!postWithId) {
+      res.status(404).json({ message: "Belirtilen ID'li gönderi bulunamadı" });
+    } else {
+      res.json(postWithId);
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Gönderi bilgisi alınamadı" });
+  }
+});
+*/
 
 //POST ile yeni bir post ekledik.
 
