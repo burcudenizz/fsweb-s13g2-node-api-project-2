@@ -61,14 +61,17 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   const { title, contents } = req.body;
 
+  //     let title = req.body.title;
+  // let contents = req.body.contents;
+
   if (!title || !contents) {
     res.status(400).json({
       message: "Lütfen gönderi için bir title ve contents sağlayın",
     });
   } else {
     try {
-      let { id } = await Posts.insert({ title, contents });
-      let insersedPost = await Posts.findById(id);
+      let insertedId = await Posts.insert({ title, contents });
+      let insersedPost = await Posts.findById(insertedId.id);
       res.status(201).json(insersedPost);
     } catch (err) {
       console.log(err); // erroru saklamış oluruz.
